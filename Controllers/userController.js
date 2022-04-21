@@ -20,7 +20,7 @@ function getUser(req, res) {
 }
 
 function updateUser(req, res) {
-    User.findOneAndUpdate(req.query, (err, userUpdated) => {
+    User.findOneAndUpdate(req.query,req.body, (err, userUpdated) => {
         if (err) {
             return res.status(400).send(err.message);
         }
@@ -31,9 +31,9 @@ function updateUser(req, res) {
 function deleteUser(req, res){
     User.findOneAndDelete(req.query, (err, userDeleted) => {
         if (err) {
-            return req.status(400).send(err.message);
+            return res.status(400).send(err.message);
         }
-        return req.status(200).send(userDeleted);
+        return res.status(200).send(userDeleted);
     });
 }
 
