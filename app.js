@@ -4,7 +4,7 @@ const ticketRoutes = require('./Routes/ticketRoutes');
 
 const app = express();
 app.use(express.urlencoded({
-    extended: false,
+  extended: false,
 }));
 
 app.use(express.json());
