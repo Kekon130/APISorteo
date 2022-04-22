@@ -1,5 +1,14 @@
 const Ticket = require('../Models/TicketModel');
 
+const filter = {
+  isReserved: false,
+  isSold: false,
+  reservedBy: false,
+  reservedDate: false,
+  soldBy: false,
+  soldDate: false,
+};
+
 function createTicket(req, res) {
   const ticket = new Ticket(req.body);
   ticket.save((err, ticketInfo) => {
@@ -11,7 +20,7 @@ function createTicket(req, res) {
 }
 
 function getAllTickets(req, res) {
-  Ticket.find({}, (err, tickets) => {
+  Ticket.find({}, filter, (err, tickets) => {
     if (err) {
       return res.status(400).send(err.message);
     }
@@ -20,11 +29,29 @@ function getAllTickets(req, res) {
 }
 
 function getTicket(req, res) {
-  Ticket.findOne(req.query, (err, ticket) => {
+  Ticket.findOne(req.query, filter, (err, ticket) => {
     if (err) {
       return res.status(400).send(err.message);
     }
     return res.send(ticket);
+  });
+}
+
+function getAllTicketsAllInfo(req, res) {
+  Ticket.find({}, (err, tickets) => {
+    if (err) {
+      return res.status(400).send(err.message);
+    }
+    return res.status(200).send(tickets);
+  })
+}
+
+function getTicketAllInfo(req, res) {
+  Ticket.findOne(req.query, (err, ticket) => {
+    if (err) {
+      return res.status(400).send(err.message);
+    }
+    return res.status(200),send(ticket);
   });
 }
 
@@ -50,6 +77,8 @@ module.exports = {
   createTicket,
   getAllTickets,
   getTicket,
+  getAllTicketsAllInfo,
+  getTicketAllInfo,
   updateTicket,
   deleteTicket,
 };
