@@ -1,4 +1,4 @@
-const Ticket = require('../Models/TicketModel');
+  const Ticket = require('../Models/TicketModel');
 
 const filter = {
   isReserved: false,
