@@ -14,5 +14,19 @@ const ticketSchema = new Schema({
   soldDate: { type: Date },
   imageURI: { type: String, required: [true, 'Image URI required'] },
 });
+function sellTicket(name) {
+  this.soldDate = Date.now();
+  this.isSold = true;
+  this.soldBy = name;
+}
+function reservedTicket(name) {
+  this.isReserved = true;
+  this.reservedBy = name;
+  this.reservedDate = Date.now();
+}
 
+module.exports = {
+  sellTicket,
+  reservedTicket,
+};
 module.exports = mongoose.model('Ticket', ticketSchema);

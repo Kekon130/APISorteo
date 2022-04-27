@@ -7,5 +7,4 @@ const userSchema = new Schema({
   telegramUser: { type: String, unique: true, required: [true, 'Telegram user required'] },
 });
 
-
 module.exports = mongoose.model('User', userSchema);
